@@ -3,10 +3,8 @@ package com.nynus.recipes_app.Controller;
 import com.nynus.recipes_app.Model.Food;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +14,7 @@ import java.util.Map;
 @RequestMapping("/recipes")
 public class RecipesController {
     private final List<Food> foods = new ArrayList<>();
+    private List<Food> filter = new ArrayList<>();
 
     // Inicialize the class with the recipes for testing
     public RecipesController(){
@@ -25,14 +24,17 @@ public class RecipesController {
         foods.add(new Food("Chicken Stir-Fry", "chicken breast, bell peppers, broccoli, carrot, soy sauce, garlic, ginger, sesame oil, cornstarch, green onion, rice", "Slice the chicken and toss with cornstarch. Stir-fry it in hot oil until browned and remove, then stir-fry the vegetables with garlic and ginger. Return the chicken, add soy sauce and sesame oil, and toss until coated. Serve over rice topped with green onion.", 30, 3));
         foods.add(new Food("Berry Yogurt Parfait", "Greek yogurt, granola, strawberries, blueberries, honey, mint", "Layer Greek yogurt, granola, and mixed berries in a glass. Repeat the layers, drizzle with honey, and garnish with mint.", 10, 2));
     }
+
     // Preload the list
     @ModelAttribute(name = "foods")
     public List<Food> getFoods(){
         return foods;
     }
 
+
     @GetMapping({"/", "","list"})
     public String index(Model model){
+        model.addAttribute("filter", filter);
         return "index";
     }
 
@@ -46,6 +48,17 @@ public class RecipesController {
     public String addFood(Food food){
         foods.add(food);
         return "redirect:/recipes/";
+    }
+
+
+    @GetMapping("/filter")
+    public String newFood(@RequestParam String name, ModelMap model){
+        System.out.println(name);
+        if(!name.isEmpty() || foods.size() > 1){
+            filter = foods.stream().filter(food -> food.getName().contains(name)).toList();
+        }
+        model.addAttribute("filter", filter);
+        return "index";
     }
 
 }

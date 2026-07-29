@@ -14,13 +14,23 @@
             <th>Prepration Time</th>
             <th>Servings</th>
         </thead>
-        <tbody th:each="food: ${foods}">
+
+        <tbody th:each="food: ${foods}" th:if="${filter.isEmpty()}">
             <td th:text="${food.name}"></td>
             <td th:text="${food.ingredients}"></td>
             <td th:text="${food.preparation}"></td>
             <td th:text="${food.prep_time}"></td>
             <td th:text="${food.servings}"></td>
         </tbody>
+
+        <tbody th:each="food: ${filter}" th:if="${!filter.isEmpty()}">
+        <td th:text="${food.name}"></td>
+        <td th:text="${food.ingredients}"></td>
+        <td th:text="${food.preparation}"></td>
+        <td th:text="${food.prep_time}"></td>
+        <td th:text="${food.servings}"></td>
+        </tbody>
+
     </table>
 </body>
 </html>
