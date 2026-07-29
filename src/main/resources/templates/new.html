@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Food</title>
+</head>
+<body>
+    <h1>Add Food</h1>
+    <form th:action="@{/recipes/add}" th:object="${food}" method="post">
+        <div>
+            <label th:for="${food.name}">Name: </label>
+            <input type="text" th:field="${food.name}"/>
+        </div>
+        <div>
+            <label th:for="${food.ingredients}">Ingredients: </label>
+            <textarea th:field="${food.ingredients}"/></textarea>
+        </div>
+        <div>
+            <label th:for="${food.preparation}">Preparation: </label>
+            <textarea th:field="${food.preparation}"/></textarea>
+        </div>
+        <div>
+            <label th:for="${food.prep_time}">Prepration: </label>
+            <input type="text" th:field="${food.prep_time}"/>
+        </div>
+        <div>
+            <label th:for="${food.servings}">Servings: </label>
+            <input type="text" th:field="${food.servings}"/>
+        </div>
+        <button type="submit">Save</button>
+
+    </form>
+</body>
+</html>
