@@ -6,31 +6,41 @@
 </head>
 <body>
     <h1>List of foods</h1>
+    <form th:action="@{/recipes/filter}" method="get">
+        <input type="text" name="name" placeholder="Search here...">
+        <button type="submit">Search</button>
+    </form>
+
     <table>
         <thead>
             <th>Name</th>
             <th>Ingredients</th>
             <th>Preparation</th>
-            <th>Prepration Time</th>
+            <th>Preparation Time</th>
             <th>Servings</th>
         </thead>
 
-        <tbody th:each="food: ${foods}" th:if="${filter.isEmpty()}">
+        <tbody th:if="${!foods.isEmpty()}" th:each="food: ${foods}">
             <td th:text="${food.name}"></td>
             <td th:text="${food.ingredients}"></td>
             <td th:text="${food.preparation}"></td>
             <td th:text="${food.prep_time}"></td>
             <td th:text="${food.servings}"></td>
         </tbody>
-
-        <tbody th:each="food: ${filter}" th:if="${!filter.isEmpty()}">
-        <td th:text="${food.name}"></td>
-        <td th:text="${food.ingredients}"></td>
-        <td th:text="${food.preparation}"></td>
-        <td th:text="${food.prep_time}"></td>
-        <td th:text="${food.servings}"></td>
+        <tbody th:if="${foods.isEmpty()}">
+            <tr>
+                <td colspan="5" style="text-align: center;">There is no data in this table. :c</td>
+            </tr>
         </tbody>
-
     </table>
+
+    <p th:if="${filter.isEmpty()}"> there is no filter applied</p>
+
+    <p th:if="${!filter.isEmpty()}"> there is filter applied</p>
+
+
+
+
+    <a th:href="@{/recipes/new}">Add New Food</a>
 </body>
 </html>
