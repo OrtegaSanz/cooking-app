@@ -21,25 +21,21 @@
         </thead>
 
         <tbody th:if="${!foods.isEmpty()}" th:each="food: ${foods}">
-            <td th:text="${food.name}"></td>
-            <td th:text="${food.ingredients}"></td>
-            <td th:text="${food.preparation}"></td>
-            <td th:text="${food.prep_time}"></td>
-            <td th:text="${food.servings}"></td>
+            <tr>
+                <td th:text="${food.name}"></td>
+                <td th:text="${food.ingredients}"></td>
+                <td th:text="${food.preparation}"></td>
+                <td th:text="${food.prep_time}"></td>
+                <td th:text="${food.servings}"></td>
+            </tr>
         </tbody>
         <tbody th:if="${foods.isEmpty()}">
             <tr>
                 <td colspan="5" style="text-align: center;">There is no data in this table. :c</td>
             </tr>
         </tbody>
+
     </table>
-
-    <p th:if="${filter.isEmpty()}"> there is no filter applied</p>
-
-    <p th:if="${!filter.isEmpty()}"> there is filter applied</p>
-
-
-
 
     <a th:href="@{/recipes/new}">Add New Food</a>
 </body>
