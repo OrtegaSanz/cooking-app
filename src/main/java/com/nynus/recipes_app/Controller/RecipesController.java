@@ -1,6 +1,9 @@
 package com.nynus.recipes_app.Controller;
 
+import com.nynus.recipes_app.Config.DbConfig;
 import com.nynus.recipes_app.Model.Food;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,7 +15,11 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/recipes")
+@Component
 public class RecipesController {
+    @Value("${sql.connection}")
+    private String myName;
+
     private final List<Food> foods = new ArrayList<>();
 
     // Inicialize the class with the recipes for testing
@@ -33,8 +40,12 @@ public class RecipesController {
     @GetMapping({"/", "","list"})
     public String index(Model model){
         //model.addAttribute("filter",null);
+        System.out.println(myName);
         return "index";
     }
+
+
+
 
     @GetMapping("/new")
     public String newFood(Map<String,Object> model){
