@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Food {
+    private int id;
     private String name;
     private String ingredients;
     private String preparation;

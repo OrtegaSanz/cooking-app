@@ -2,11 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New Food</title>
+    <title th:text="${id != null} ? ${'Edit Food'} : ${'Add Food'}"></title>
 </head>
 <body>
-    <h1>Add Food</h1>
-    <form th:action="@{/recipes/add}" th:object="${food}" method="post">
+
+    <h1 th:text="${id != null} ? ${'Edit Food'} : ${'Add Food'}"></h1>
+
+
+    <form th:action="${id != null} ? @{/recipes/update} : @{/recipes/add}" th:object="${food}" method="post">
+        <input type="hidden" th:field="${food.id}" />
         <div>
             <label th:for="${food.name}">Name: </label>
             <input type="text" th:field="${food.name}"/>
@@ -20,12 +24,12 @@
             <textarea th:field="${food.preparation}"/></textarea>
         </div>
         <div>
-            <label th:for="${food.prep_time}">Prepration: </label>
-            <input type="text" th:field="${food.prep_time}"/>
+            <label th:for="${food.prep_time}">Preparation Time: </label>
+            <input type="number" th:field="${food.prep_time}"/>
         </div>
         <div>
             <label th:for="${food.servings}">Servings: </label>
-            <input type="text" th:field="${food.servings}"/>
+            <input type="number" th:field="${food.servings}"/>
         </div>
         <button type="submit">Save</button>
 
