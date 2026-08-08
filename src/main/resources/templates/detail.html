@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/cookCss.css}">
+    <title>Details</title>
+</head>
+<body>
+    <header>
+        <h1>Detalle</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/recipes/}">List</a></li>
+        </ul>
+    </nav>
+    <main>
+        <aside>
+            <p>Here you can see the details of your favorite food. :D</p>
+        </aside>
+        <section>
+            <div>
+                <label>Name:</label>
+                <strong><span th:text="${food.name}"></span></strong>
+            </div>
+            <div>
+                <label>Ingredients:</label>
+                <br>
+                <em><span th:text="${food.ingredients}"></span></em>
+            </div>
+            <div>
+                <label>Preparation:</label>
+                <br>
+                <em><span th:text="${food.preparation}"></span></em>
+            </div>
+            <div>
+                <label>Preparation Time:</label>
+                <strong><span th:text="${food.prep_time}"></span></strong>
+            </div>
+            <div>
+                <label>Servings:</label>
+                <strong><span th:text="${food.servings}"></span></strong>
+            </div>
+            <div>
+                <a th:href="@{/recipes/}">Return</a>
+                <a th:href="@{/recipes/confirm/{id}(id=${food.id})}">Delete</a>
+            </div>
+        </section>
+    </main>
+    <footer>Made by Yayo</footer>
+</body>
+</html>

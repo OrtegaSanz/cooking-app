@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/cookCss.css}">
     <title>Recipes</title>
 </head>
 <body>
@@ -32,7 +33,7 @@
                 <td th:text="${food.preparation}"></td>
                 <td th:text="${food.prep_time}"></td>
                 <td th:text="${food.servings}"></td>
-                <td><a th:href="@{/recipes/edit/{id}(id=${food.id})}">Edit</a> <a th:href="@{/recipes/delete/{id}(id=${food.id})}">Delete</a></td>
+                <td><a th:href="@{/recipes/edit/{id}(id=${food.id})}">Edit</a> <a th:href="@{/recipes/detail/{id}(id=${food.id})}">Detail</a></td>
             </tr>
         </tbody>
         <tbody th:if="${foods.isEmpty()}">

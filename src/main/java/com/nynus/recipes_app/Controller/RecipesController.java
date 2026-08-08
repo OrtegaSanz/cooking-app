@@ -36,12 +36,11 @@ public class RecipesController {
     }
 
     @GetMapping({"/", "","list"})
-    public String index(Model model){
+    public String index(){
         //model.addAttribute("filter",null);
         //System.out.println(myName);
         return "index";
     }
-
 
     @GetMapping("/edit/{id}")
     public String editFood(@PathVariable String id, Model model){
@@ -85,6 +84,24 @@ public class RecipesController {
         }
         return "redirect:/recipes";
     }
+
+    @GetMapping("/detail/{id}")
+    public String detailFood(@PathVariable int id, Map<String, Object> model){
+        for(int i = 0; i < foods.size(); i++){
+            if(Objects.equals(foods.get(i).getId(),id)){
+                model.put("food",foods.get(i));
+                return "detail";
+            }
+        }
+        return "detail";
+    }
+
+    @GetMapping("/confirm/{id}")
+    public String confirmationFood(@PathVariable int id, Map<String, Object> model){
+        model.put("id",id);
+        return "confirm";
+    }
+
 
     @GetMapping("/filter")
     public String filter(@RequestParam(defaultValue = "") String name, ModelMap model){
